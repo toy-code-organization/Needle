@@ -90,6 +90,17 @@ docker compose exec -T postgres `
 
 API documentation is available at <http://localhost:8000/docs>.
 
+## Run tests
+
+Run the automated tests in the same Docker Python environment used by the
+application:
+
+```powershell
+docker compose run --rm --build `
+  -v "${PWD}\tests:/workspace/tests:ro" `
+  ai-server python -m unittest discover -s tests -v
+```
+
 ## Test the Ollama connection
 
 Ollama runs on the Windows host. The FastAPI container connects through
