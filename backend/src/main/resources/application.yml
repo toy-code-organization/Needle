@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: needle-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/needle
+    username: admin
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    enabled: true
+
+server:
+  port: 8080
