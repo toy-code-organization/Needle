@@ -71,6 +71,23 @@ docker compose ps postgres
 Initialization scripts run only when the database volume is empty. Later
 schema changes must use migrations instead of editing an already-run script.
 
+The `vector` extension is enabled automatically for a new database. To enable
+it in an existing local database volume, run:
+
+```powershell
+Get-Content -Raw db/init/02-enable-vector.sql | `
+  docker compose exec -T postgres `
+  psql -U postgres -d ai_onboarding -v ON_ERROR_STOP=1
+```
+
+Confirm the extension:
+
+```powershell
+docker compose exec -T postgres `
+  psql -U postgres -d ai_onboarding `
+  -c "SELECT extname, extversion FROM pg_extension WHERE extname = 'vector';"
+```
+
 API documentation is available at <http://localhost:8000/docs>.
 
 ## Test the Ollama connection
