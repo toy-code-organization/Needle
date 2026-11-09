@@ -14,6 +14,15 @@ environment is not required.
 
 ## Start the development server
 
+Create the local environment file once:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Replace every `replace-with-...` value in `.env`. The `.env` file is ignored
+by Git.
+
 ```powershell
 docker compose up --build -d
 ```
@@ -40,6 +49,27 @@ status
 ------
 ok
 ```
+
+## PostgreSQL schemas and accounts
+
+The PostgreSQL container creates two isolated work areas on its first start:
+
+- `backend` schema, owned by `backend_user`
+- `ai` schema, owned by `ai_user`
+
+Each account can create objects only in its own schema. PostgreSQL data is
+stored in the named Docker volume `postgres-data` and survives container
+restarts. The default host port is `5433` to avoid conflicts with an existing
+local PostgreSQL service; containers use port `5432` internally.
+
+Check PostgreSQL status:
+
+```powershell
+docker compose ps postgres
+```
+
+Initialization scripts run only when the database volume is empty. Later
+schema changes must use migrations instead of editing an already-run script.
 
 API documentation is available at <http://localhost:8000/docs>.
 
