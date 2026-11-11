@@ -1,5 +1,22 @@
 # API 명세
 
+## TXT 문서 업로드 및 목록 조회 (구현 코드 기준)
+
+### POST /api/documents
+
+- 요청: `multipart/form-data`, 파일 필드 이름 `file`.
+- 파일: 이름이 `.txt`로 끝나는 비어 있지 않은 UTF-8 파일, 최대 1 MiB. NUL 문자는 허용하지 않습니다.
+- 성공: `201 Created`, 응답 예시 `{"id":1,"filename":"guide.txt","content":"문서 내용"}`.
+- 파일명이나 내용이 유효하지 않으면 `400 Bad Request`, 업로드 크기 제한 초과는 서버 설정에 따라 `413 Content Too Large`가 반환될 수 있습니다.
+- 확장자와 인코딩을 검사하며 텍스트의 실제 용도까지 판별하지 않습니다.
+
+### GET /api/documents
+
+- 성공: `200 OK`, 문서 배열. 각 항목은 `id`, `filename`, `content`를 포함합니다. 문서가 없으면 `[]`입니다.
+- 응답 예시: `[{"id":1,"filename":"guide.txt","content":"문서 내용"}]`.
+
+두 API는 구현 코드 기준입니다. 실제 HTTP 및 DB 동작은 아직 검증되지 않았습니다. 인증·인가, 파일 삭제와 AI 연동은 포함되지 않습니다.
+
 원본: [PJT Needle API 명세](https://app.notion.com/p/414e1f6a336e8044bcf0cf48d0407a4f)
 
 Notion 데이터베이스에 기록된 설계 초안이며 실제 구현 여부는 별도 확인이 필요합니다.

@@ -1,5 +1,18 @@
 # ERD
 
+## 문서 업로드 (구현 코드 기준)
+
+```mermaid
+erDiagram
+    DOCUMENTS {
+        integer id PK
+        text filename
+        text content
+    }
+```
+
+`backend.documents`는 파일명과 UTF-8 텍스트 내용을 저장합니다. `id`는 자동 생성되며 세 컬럼 모두 필수입니다. 현재 온보딩 ERD와의 관계는 정의되지 않았습니다. Flyway 적용 및 실제 DB 동작은 별도 확인이 필요합니다.
+
 원본: [PJT Needle ERD](https://app.notion.com/p/414e1f6a336e803d9aa2c35e6e284779?pvs=204)
 
 ## 온보딩 및 업무 ERD 초안
