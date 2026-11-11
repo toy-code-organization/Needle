@@ -22,17 +22,17 @@ public class Document {
     @Column(nullable = false, columnDefinition = "text")
     private String content;
 
-    // JPA가 객체를 생성할 때 사용하는 기본 생성자입니다.
+    // JPA가 객체를 생성할 때 사용하는 기본 생성자
     protected Document() {
     }
 
-    // 업로드한 파일명과 내용을 문서에 담습니다.
+    // 업로드한 파일명과 내용을 문서에 포함
     public Document(String filename, String content) {
         this.filename = filename;
         this.content = content;
     }
 
-    // 저장된 문서의 값을 조회합니다.
+    // 저장된 문서의 값을 조회
     public Integer getId() { return id; }
     public String getFilename() { return filename; }
     public String getContent() { return content; }

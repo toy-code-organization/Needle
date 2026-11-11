@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-// 문서 관련 HTTP 요청을 처리합니다.
+// 문서 관련 HTTP 요청을 처리
 @RestController
 @RequestMapping("/api/documents")
 public class DocumentController {
@@ -21,14 +21,14 @@ public class DocumentController {
         this.service = service;
     }
 
-    // multipart 요청의 file 항목을 받아 문서를 저장합니다.
+    // multipart 요청의 file 항목을 받아 문서를 저장
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public Document upload(@RequestPart("file") MultipartFile file) {
         return service.upload(file);
     }
 
-    // 저장된 문서 목록을 반환합니다.
+    // 저장된 문서 목록을 반환
     @GetMapping
     public List<Document> list() {
         return service.findAll();
